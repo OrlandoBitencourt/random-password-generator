@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='general.css') }}">
+    <title>Gerador de senha segura</title>
+</head>
+<body>
+    <h1 id="titulo">Gerador de senha<br></h1>
+    <form method="post" id="form">
+        <div>
+            <div id="size">
+                <label><strong>Tamanho da senha: </strong></label><br>
+                <input type="range" min="1" max="100" value="20" name="tamanho" id="tamanho" onchange="updateTextInput(this.value);">
+                <label type="text" for="tamanho" id="textInput" value="20">20</label>
+                <br><br>
+            </div>
+
+            <div id="check">
+                <label><strong>Selecione:</strong></label><br>
+
+                <input type="checkbox" id="letras" name="letras" value="letras" checked>
+                <label for="letras">Letras</label><br>
+
+                <input type="checkbox" id="numbers" name="numbers" value="numbers" checked>
+                <label for="numbers">Números</label><br>
+
+                <input type="checkbox" id="digitos" name="digitos" value="digitos" checked>
+                <label for="digitos">Caracteres especiais</label><br>
+
+                <input type="checkbox" id="ponctuation" name="ponctuation" value="ponctuation" checked>
+                <label for="ponctuation">Ponctuação</label>
+            </div>
+            <br><br>
+            <button type="submit" class="botao" id="botao">Gerar Senha</button>
+            <br><br>
+            <h4 id="senha">{{ senha }}</h4>
+        </div>
+    </form>
+</body>
+</html>
+
+<script>
+    function updateTextInput(val) {
+          document.getElementById('textInput').value=val; 
+          document.getElementById('textInput').textContent=val;
+        }
+</script>
