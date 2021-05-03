@@ -7,30 +7,27 @@
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='general.css') }}">
     <title>Gerador de senha segura</title>
 </head>
-<body>
+<body onload="on_load()">
     <h1 id="titulo">Gerador de senha<br></h1>
     <form method="post" id="form">
         <div>
             <div id="size">
                 <label><strong>Tamanho da senha: </strong></label><br>
-                <input type="range" min="1" max="100" value="20" name="tamanho" id="tamanho" onchange="updateTextInput(this.value);">
-                <label type="text" for="tamanho" id="textInput" value="20">20</label>
+                <input type="range" min="1" max="100" value="{{ parametros_senha['tamanho'] }}" name="tamanho" id="tamanho" onchange="updateTextInput(this.value);">
+                <label type="text" for="tamanho" id="textInput" value="{{ parametros_senha['tamanho'] }}">{{ parametros_senha['tamanho'] }}</label>
                 <br><br>
             </div>
 
             <div id="check">
                 <label><strong>Selecione:</strong></label><br>
 
-                <input type="checkbox" id="letras" name="letras" value="letras" checked>
+                <input type="checkbox" id="letras" name="letras" value="{{ parametros_senha['letras'] }}">
                 <label for="letras">Letras</label><br>
 
-                <input type="checkbox" id="numbers" name="numbers" value="numbers" checked>
-                <label for="numbers">Números</label><br>
+                <input type="checkbox" id="digitos" name="digitos" value="{{ parametros_senha['digitos'] }}">
+                <label for="digitos">Números</label><br>
 
-                <input type="checkbox" id="digitos" name="digitos" value="digitos" checked>
-                <label for="digitos">Caracteres especiais</label><br>
-
-                <input type="checkbox" id="ponctuation" name="ponctuation" value="ponctuation" checked>
+                <input type="checkbox" id="ponctuation" name="ponctuation" value="{{ parametros_senha['ponctuation'] }}">
                 <label for="ponctuation">Ponctuação</label>
             </div>
             <br><br>
@@ -47,4 +44,28 @@
           document.getElementById('textInput').value=val; 
           document.getElementById('textInput').textContent=val;
         }
+
+    function on_load(){
+        if (document.getElementById('letras').value == "True"){
+            document.getElementById('letras').checked=true;
+            document.getElementById('letras').value="True";
+        } else {
+            document.getElementById('letras').checked=false;
+            document.getElementById('letras').value="False";
+        }
+        if (document.getElementById('digitos').value == "True"){
+            document.getElementById('digitos').checked=true;
+            document.getElementById('digitos').value="True";
+        } else {
+            document.getElementById('digitos').checked=false;
+            document.getElementById('digitos').value="False";
+        }
+        if (document.getElementById('ponctuation').value == "True"){
+            document.getElementById('ponctuation').checked=true;
+            document.getElementById('ponctuation').value="True";
+        } else {
+            document.getElementById('ponctuation').checked=false;
+            document.getElementById('ponctuation').value="False";
+        }
+    }
 </script>
